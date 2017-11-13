@@ -3,6 +3,10 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-  <app-cats></app-cats>
+  <nav>
+    <a routerLink="/main-page">Main Page</a>
+    <a routerLink="/cats">Cats</a>
+  </nav>
+  <router-outlet></router-outlet>
   <app-messages></app-messages>
 </div>

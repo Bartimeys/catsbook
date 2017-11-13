@@ -10,12 +10,19 @@ import {CATS} from './list-cats';
 
 @Injectable()
 export class CatService {
+
   constructor(private messageService: MessageService) { }
 
   getCats(): Observable<Cat[]> {
-    // Todo: send the message _after_ fetching the heroes
+    // Todo: send the message _after_ fetching the cats
     this.messageService.add('CatService: test');
     return of(CATS);
+  }
+
+  getCat(id:number): Observable<Cat> {
+    // Todo: send the message _after_ fetching the cats
+    this.messageService.add(`CatService: fetched cat id=${id}`);
+    return of(CATS.find(cat => cat.id === id));
   }
 
 }

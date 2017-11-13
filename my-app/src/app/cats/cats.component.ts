@@ -11,17 +11,12 @@ import { CatService } from '../cat.service';
   encapsulation: ViewEncapsulation.None
 })
 export class CatsComponent implements OnInit {
-  selectedCat: Cat;
   cats: Cat[];
 
   constructor(private catService: CatService) { }
 
   ngOnInit() {
     this.getCats();
-  }
-
-  onSelect(cat: Cat): void {
-    this.selectedCat = cat;
   }
 
   getCats(): void {

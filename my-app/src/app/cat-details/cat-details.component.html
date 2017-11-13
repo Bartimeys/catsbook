@@ -3,15 +3,16 @@
   <p class="list-group-item-success">
     cat-details works!
   </p>
-  <div *ngIf="cat">
-
-    <h2>{{ cat.name | uppercase }} Details</h2>
-    <div><span>id: </span>{{cat.id}}</div>
-    <div class="input-group">
-        <span class="input-group-addon" id="sizing-addon1">name:</span>
-        <input type="text" class="form-control" aria-label="Cat name" [(ngModel)]="cat.name" placeholder="name"/>
+    <div *ngIf="cat">
+      <h2>{{ cat.name | uppercase }} Details</h2>
+      <div><span>id: </span>{{cat.id}}</div>
+      <div>
+        <label>name:
+          <input [(ngModel)]="cat.name" placeholder="name"/>
+        </label>
+      </div>
+      <button (click)="goBack()">go back</button>
     </div>
 
-  </div>
   </div>
 </div>

@@ -2,12 +2,13 @@
   <p class="list-group-item-success">
     cats works!
   </p>
-  <h2>My Heroes</h2>
+  <h2>My Cats</h2>
   <ul class="cats list-group">
-    <li *ngFor="let cat of cats" [class.selected]="cat === selectedCat" (click)="onSelect(cat)" class="list-group-item list-group-item-action">
-      <span class="badge">{{cat.id}}</span> {{cat.name}}
+    <li *ngFor="let cat of cats"  class="list-group-item list-group-item-action">
+      <a routerLink="/detail/{{cat.id}}">
+        <span class="badge">{{cat.id}}</span> {{cat.name}}
+      </a>
     </li>
   </ul>
-  <app-cat-details [cat]="selectedCat"></app-cat-details>
 </div>
 
