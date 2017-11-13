@@ -1,0 +1,11 @@
+<p>
+  cats works!
+</p>
+<h2>{{ cat.name | uppercase }} Details</h2>
+<div><span>id: </span>{{cat.id}}</div>
+<div><span>name: </span>{{cat.name}}</div>
+<div>
+  <label>name:
+    <input [(ngModel)]="cat.name" placeholder="name">
+  </label>
+</div>
