@@ -1,12 +1,10 @@
 <div class="container">
-  <p class="list-group-item-success">
-    cats works!
-  </p>
   <h2>My Cats</h2>
-  <ul class="cats list-group">
-    <li *ngFor="let cat of cats"  class="list-group-item list-group-item-action">
+  <ul class="list-group">
+    <li *ngFor="let cat of cats"   class="list-group-item justify-content-between">
       <a routerLink="/detail/{{cat.id}}">
-        <span class="badge">{{cat.id}}</span> {{cat.name}}
+        <span class="badge badge-default badge-pill">{{cat.id}}</span>
+      {{cat.name}}
       </a>
     </li>
   </ul>

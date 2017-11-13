@@ -1,12 +1,18 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <nav>
-    <a routerLink="/main-page">Main Page</a>
-    <a routerLink="/cats">Cats</a>
-  </nav>
-  <router-outlet></router-outlet>
-  <app-messages></app-messages>
-</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="text-align: center">
+  <a class="navbar-brand" href="#">
+    <img src="#" alt="Logo" style="width:40px;">
+  </a>
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/main-page">Main Page</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/cats">Cats</a>
+    </li>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>
+<app-messages></app-messages>
+

@@ -1,12 +1,21 @@
-<p class="list-group-item-success">
-  main-page works!
-</p>
-<h3>Top Cats</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let cat of cats" class="col-1-4"
-     routerLink="/detail/{{cat.id}}">
-    <div class="module cat">
-      <h4>{{cat.name}}</h4>
+<div class="container">
+  <h3>Top Cats</h3>
+  <div class="row marketing">
+    <div class="card col-lg-12 m-3" *ngFor="let cat of cats">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-block">
+        <h4 class="card-title">{{cat.name}}</h4>
+        <p class="card-text">{{cat.description}}</p>
+        <a routerLink="/detail/{{cat.id}}" class="btn btn-primary">Go to {{cat.name}} info</a>
+      </div>
     </div>
-  </a>
+  </div>
 </div>
+<!--<div class="grid grid-pad">-->
+  <!--<a *ngFor="let cat of cats" class="col-1-4"-->
+     <!--routerLink="/detail/{{cat.id}}">-->
+    <!--<div class="module cat">-->
+      <!--<h4>{{cat.name}}</h4>-->
+    <!--</div>-->
+  <!--</a>-->
+<!--</div>-->
