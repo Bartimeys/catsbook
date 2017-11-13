@@ -1,11 +1,13 @@
-<p>
-  cats works!
-</p>
-<h2>{{ cat.name | uppercase }} Details</h2>
-<div><span>id: </span>{{cat.id}}</div>
-<div><span>name: </span>{{cat.name}}</div>
-<div>
-  <label>name:
-    <input [(ngModel)]="cat.name" placeholder="name">
-  </label>
+<div class="container">
+  <p class="list-group-item-success">
+    cats works!
+  </p>
+  <h2>My Heroes</h2>
+  <ul class="cats list-group">
+    <li *ngFor="let cat of cats" [class.selected]="cat === selectedCat" (click)="onSelect(cat)" class="list-group-item list-group-item-action">
+      <span class="badge">{{cat.id}}</span> {{cat.name}}
+    </li>
+  </ul>
+  <app-cat-details [cat]="selectedCat"></app-cat-details>
 </div>
+

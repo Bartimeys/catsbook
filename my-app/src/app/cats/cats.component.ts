@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
 import { Cat } from '../cats'
+
+import { CatService } from '../cat.service';
 
 @Component({
   selector: 'app-cats',
@@ -8,13 +11,23 @@ import { Cat } from '../cats'
   encapsulation: ViewEncapsulation.None
 })
 export class CatsComponent implements OnInit {
-  cat : Cat = {
-    id: 1,
-    name: 'Vasia'
-  };
-  constructor() { }
+  selectedCat: Cat;
+  cats: Cat[];
+
+  constructor(private catService: CatService) { }
 
   ngOnInit() {
+    this.getCats();
   }
+
+  onSelect(cat: Cat): void {
+    this.selectedCat = cat;
+  }
+
+  getCats(): void {
+    this.catService.getCats()
+      .subscribe(cats => this.cats = cats);
+  }
+
 
 }
