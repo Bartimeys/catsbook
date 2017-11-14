@@ -36,8 +36,13 @@ export class CatsComponent implements OnInit {
   }
 
   delete(cat: Cat): void {
-    this.cats = this.cats.filter(c => c !== cat);
-    this.catService.deleteCat(cat).subscribe();
+    let del = confirm("Are you realy want to delete cat info? ");
+    if(del===true){
+      this.cats = this.cats.filter(c => c !== cat);
+      this.catService.deleteCat(cat).subscribe();
+    }else{
+      alert("ok");
+    }
   }
 
 

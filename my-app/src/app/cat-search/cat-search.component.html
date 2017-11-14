@@ -1,0 +1,19 @@
+<div class="row" id="search-component">
+  <div class="col-lg-7">
+    <div class="input-group">
+        <input type="text" class="form-control" #searchBox id="search-box" (keyup)="search(searchBox.value)"/>
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">Go!</button>
+      </span>
+    </div>
+    <div class="col-lg-7">
+      <ul class="search-result">
+        <li *ngFor="let cat of cats$ | async">
+          <a routerLink="/detail/{{cat.id}}">
+            {{cat.name}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

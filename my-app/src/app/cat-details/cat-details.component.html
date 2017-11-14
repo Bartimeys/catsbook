@@ -1,19 +1,21 @@
+<div class="container">
 <div class="row">
   <div class="col-lg-12 col-md-12">
-  <p class="list-group-item-success">
-    cat-details works!
-  </p>
+
     <div *ngIf="cat">
-      <h2>{{ cat.name | uppercase }} Details</h2>
-      <div><span>id: </span>{{cat.id}}</div>
-      <div>
-        <label>name:
-          <input [(ngModel)]="cat.name" placeholder="name"/>
-        </label>
+      <p>{{ cat.name | uppercase }} Details</p>
+      <div class="form-group">
+        <label for="formGroupExampleInput">name:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="cat.name">
       </div>
-      <button (click)="goBack()">go back</button>
-      <button (click)="save()">save</button>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Description:</label>
+        <input type="text" class="form-control" id="formGroupExampleInput2" [(ngModel)]="cat.description" >
+      </div>
+      <button type="button" class="btn btn-outline-secondary" (click)="goBack()">Go Back</button>
+      <button type="button" class="btn btn-outline-success" (click)="save()">Save</button>
     </div>
 
   </div>
+</div>
 </div>
