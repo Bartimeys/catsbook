@@ -1,7 +1,10 @@
 <div class="container">
   <h3>Top Cats</h3>
   <div class="row marketing">
-    <div class="card col-lg-12 m-3" *ngFor="let cat of cats">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <app-cat-search></app-cat-search>
+    </div>
+    <div class="card col-lg-8 col-md-8 col-sm-12 m-3" *ngFor="let cat of cats">
       <img class="card-img-top" src="..." alt="Card image cap">
       <div class="card-block">
         <h4 class="card-title">{{cat.name}}</h4>
@@ -11,11 +14,3 @@
     </div>
   </div>
 </div>
-<!--<div class="grid grid-pad">-->
-  <!--<a *ngFor="let cat of cats" class="col-1-4"-->
-     <!--routerLink="/detail/{{cat.id}}">-->
-    <!--<div class="module cat">-->
-      <!--<h4>{{cat.name}}</h4>-->
-    <!--</div>-->
-  <!--</a>-->
-<!--</div>-->

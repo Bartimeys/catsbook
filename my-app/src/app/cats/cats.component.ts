@@ -8,7 +8,7 @@ import { CatService } from '../cat.service';
   selector: 'app-cats',
   templateUrl: './cats.component.html',
   styleUrls: ['./cats.component.css'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class CatsComponent implements OnInit {
   cats: Cat[];
@@ -22,6 +22,22 @@ export class CatsComponent implements OnInit {
   getCats(): void {
     this.catService.getCats()
       .subscribe(cats => this.cats = cats);
+  }
+
+  add(name: string): void {
+    debugger;
+    name = name.trim();
+    if (!name) { return; }
+    debugger;
+    this.catService.addCat({ name } as Cat)
+      .subscribe(cat => {
+        this.cats.push(cat);
+      });
+  }
+
+  delete(cat: Cat): void {
+    this.cats = this.cats.filter(c => c !== cat);
+    this.catService.deleteCat(cat).subscribe();
   }
 
 

@@ -1,11 +1,22 @@
 <div class="container">
   <h2>My Cats</h2>
+  <div>
+    <label>Cat name:
+      <input type="text" placeholder="Enter Cat Name" #catName />
+    </label>
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(catName.value); catName.value=''">
+      add
+    </button>
+  </div>
   <ul class="list-group">
     <li *ngFor="let cat of cats"   class="list-group-item justify-content-between">
       <a routerLink="/detail/{{cat.id}}">
         <span class="badge badge-default badge-pill">{{cat.id}}</span>
       {{cat.name}}
       </a>
+      <button class="delete" title="delete cat"
+              (click)="delete(cat)">x</button>
     </li>
   </ul>
 </div>
