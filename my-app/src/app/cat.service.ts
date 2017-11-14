@@ -66,8 +66,8 @@ export class CatService {
     return this.http.get<Cat[]>(url)
       .pipe(
         map(cat => cat[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
+        tap(c => {
+          const outcome = c ? `fetched` : `did not find`;
           this.log(`${outcome} cat id=${id}`);
         }),
         catchError(this.handleError<Cat>(`getCat id=${id}`))
