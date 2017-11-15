@@ -6,7 +6,7 @@
     </div>
     <div class="col-lg-7">
       <div class="card col-lg-8 col-md-8 col-sm-12 m-3" *ngFor="let cat of cats">
-        <img class="card-img-top" src="..." alt="Card image cap">
+        <img class="card-img-top" src="{{cat.image}}" alt="Cat Photo"/>
         <div class="card-block">
           <h4 class="card-title">{{cat.name}}</h4>
           <p class="card-text">{{cat.description}}</p>

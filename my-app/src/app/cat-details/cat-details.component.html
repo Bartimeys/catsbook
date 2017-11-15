@@ -4,6 +4,9 @@
 
     <div *ngIf="cat">
       <p>{{ cat.name | uppercase }} Details</p>
+      <div class="form-group col-6 col-sm-3 placeholder">
+        <img class="card-img-top" src="{{cat.image}}" alt="Cat Photo"/>
+      </div>
       <div class="form-group">
         <label for="formGroupExampleInput">name:</label>
         <input type="text" class="form-control" id="formGroupExampleInput" [(ngModel)]="cat.name">
