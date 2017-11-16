@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Cat } from '../cats'
 
 import { CatService } from '../cat.service';
+import { CatServiceLocalStorage } from '../cat.service';
 
 @Component({
   selector: 'app-cats',
@@ -13,23 +14,34 @@ import { CatService } from '../cat.service';
 export class CatsComponent implements OnInit {
   cats: Cat[];
 
-  constructor(private catService: CatService) { }
+  constructor(private catService: CatService,
+              private catServiceLocalStorage: CatServiceLocalStorage) { }
 
   ngOnInit() {
     this.getCats();
   }
 
   getCats(): void {
-    this.catService.getCats()
-      .subscribe(cats => this.cats = cats);
+    this.cats = this.catServiceLocalStorage.getCats();
+    // this.catService.getCats()
+    //   .subscribe(cats => this.cats = cats);
   }
 
   add(name: string): void {
-    debugger;
+    name = name.trim();
+    if (!name) { return; }
+    let cat = this.catServiceLocalStorage.addCat({name} as Cat);
+    this.cats.push(cat);
+    // this.catService.addCat({ name } as Cat)
+    //   .subscribe(cat => {
+    //     this.cats.push(cat);
+    //   });
+  }
+  update(name: string): void {
     name = name.trim();
     if (!name) { return; }
     debugger;
-    this.catService.addCat({ name } as Cat)
+    this.catService.updateCat({ name } as Cat)
       .subscribe(cat => {
         this.cats.push(cat);
       });
@@ -39,9 +51,7 @@ export class CatsComponent implements OnInit {
     let del = confirm("Are you realy want to delete cat info? ");
     if(del===true){
       this.cats = this.cats.filter(c => c !== cat);
-      this.catService.deleteCat(cat).subscribe();
-    }else{
-      alert("ok");
+      this.catServiceLocalStorage.deleteCat(cat);
     }
   }
 

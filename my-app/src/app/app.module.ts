@@ -10,6 +10,7 @@ import {AppComponent} from './app.component';
 import {CatsComponent} from './cats/cats.component';
 import {CatDetailsComponent} from './cat-details/cat-details.component';
 import {CatService} from './cat.service';
+import {CatServiceLocalStorage} from './cat.service';
 import {MessagesComponent} from './messages/messages.component';
 import {MessageService} from './message.service';
 import {AppRoutingModule} from './/app-routing.module';
@@ -38,7 +39,7 @@ import { CatSearchComponent } from './cat-search/cat-search.component';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [CatService, MessageService],
+  providers: [CatService, MessageService,CatServiceLocalStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

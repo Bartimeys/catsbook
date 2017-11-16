@@ -1,45 +1,16 @@
-// import {Injectable} from '@angular/core';
-//
-// import {Observable} from 'rxjs/Rx';
-// import {of} from 'rxjs/observable/of';
-// import {MessageService} from './message.service';
-// import { HttpClient, HttpHeaders } from '@angular/common/http';
-//
-// import {Cat} from './cats';
-// import {CATS} from './list-cats';
-//
-//
-// @Injectable()
-// export class CatService {
-//
-//   constructor(private messageService: MessageService) { }
-//
-//   getCats(): Observable<Cat[]> {
-//     // Todo: send the message _after_ fetching the cats
-//     this.messageService.add('CatService: test');
-//     return of(CATS);
-//   }
-//
-//   getCat(id:number): Observable<Cat> {
-//     // Todo: send the message _after_ fetching the cats
-//     this.messageService.add(`CatService: fetched cat id=${id}`);
-//     return of(CATS.find(cat => cat.id === id));
-//   }
-//
-// }
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { catchError, map, tap } from 'rxjs/operators';
+import {Observable} from 'rxjs/Observable';
+import {of} from 'rxjs/observable/of';
+import {catchError, map, tap} from 'rxjs/operators';
 
-import { Cat } from './cats';
-import { MessageService } from './message.service';
+import {Cat} from './cats';
+import {MessageService} from './message.service';
 
 //Create rules for http headers
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable()
@@ -47,12 +18,12 @@ export class CatService {
 
   private catsUrl = 'api/cats';  // URL to web api
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+  constructor(private http: HttpClient,
+              private messageService: MessageService) {
+  }
 
   /** GET cats from the server */
-  getCats (): Observable<Cat[]> {
+  getCats(): Observable<Cat[]> {
     return this.http.get<Cat[]>(this.catsUrl)
       .pipe(
         tap(cat => this.log(`fetched cats`)),
@@ -98,7 +69,7 @@ export class CatService {
   //////// Save methods //////////
 
   /** POST: add a new cat to the server */
-  addCat (cat: Cat): Observable<Cat> {
+  addCat(cat: Cat): Observable<Cat> {
     return this.http.post<Cat>(this.catsUrl, cat, httpOptions).pipe(
       tap((cat: Cat) => this.log(`added cat w/ id=${cat.id}`)),
       catchError(this.handleError<Cat>('addCat'))
@@ -106,7 +77,7 @@ export class CatService {
   }
 
   /** DELETE: delete the cat from the server */
-  deleteCat (cat: Cat | number): Observable<Cat> {
+  deleteCat(cat: Cat | number): Observable<Cat> {
     const id = typeof cat === 'number' ? cat : cat.id;
     const url = `${this.catsUrl}/${id}`;
 
@@ -117,7 +88,7 @@ export class CatService {
   }
 
   /** PUT: update the cat on the server */
-  updateCat (cat: Cat): Observable<any> {
+  updateCat(cat: Cat): Observable<any> {
     return this.http.put(this.catsUrl, cat, httpOptions).pipe(
       tap(_ => this.log(`updated cat id=${cat.id}`)),
       catchError(this.handleError<any>('updateCat'))
@@ -130,7 +101,7 @@ export class CatService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
@@ -148,4 +119,72 @@ export class CatService {
   private log(message: string) {
     this.messageService.add('CatService: ' + message);
   }
+}
+
+@Injectable()
+export class CatServiceLocalStorage {
+  private catsUrl = 'api/cats';
+
+  getCats(): Cat[] {
+    let catsJSON = localStorage.getItem('cats');
+    if (!catsJSON) {
+      let testData = [
+        {
+          id: 2,
+          name: 'Vasia',
+          description: 'I am fat cat',
+          image: 'https://cs7.pikabu.ru/post_img/big/2014/07/04/11/1404493722_841718462.jpeg'
+        },
+        {
+          id: 3,
+          name: 'Kick Ass',
+          description: 'come to me and I kick your ass',
+          image: 'https://cs7.pikabu.ru/post_img/big/2014/07/04/11/1404493722_841718462.jpeg'
+        },
+        {
+          id: 4,
+          name: 'Lucky',
+          description: 'I ma lucky cat',
+          image: 'https://cs7.pikabu.ru/post_img/big/2014/07/04/11/1404493722_841718462.jpeg'
+        },
+        {
+          id: 5,
+          name: 'Timchik',
+          description: 'I know angular5, and if you will "good boy" maybe I tell you all secrets of this framework',
+          image: 'https://cs7.pikabu.ru/post_img/big/2014/07/04/11/1404493722_841718462.jpeg'
+        },
+        {
+          id: 6,
+          name: 'Tim chen Ir',
+          description: 'I am dictator',
+          image: 'https://cs7.pikabu.ru/post_img/big/2014/07/04/11/1404493722_841718462.jpeg'
+        }
+      ];
+      localStorage.setItem('cats',JSON.stringify(testData));
+      return testData;
+    } else {
+      let cats = JSON.parse(catsJSON);
+      return cats;
+    }
+  }
+  //////// Save methods //////////
+
+  /** POST: add a new cat to the server */
+  addCat(cat: Cat): Cat {
+    let catsJSON = localStorage.getItem('cats');
+    let cats = JSON.parse(catsJSON);
+    cats.push(cat);
+    localStorage.setItem('cats',JSON.stringify(cats));
+    return cat;
+  }
+  /** DELETE: delete the cat from the server */
+  deleteCat(cat: Cat): Cat{
+    let id = typeof cat === 'number' ? cat : cat.id;
+    let id2 = JSON.stringify(id);
+    let url = `${this.catsUrl}/${id}`;
+
+    localStorage.removeItem(id2);
+    return cat;
+  }
+
 }
