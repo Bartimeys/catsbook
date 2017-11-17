@@ -1,46 +1,47 @@
 let express = require('express');
 let router = express.Router();
 
-let Todo = require('../models/Todo.js');
+let Cat = require('../models/Cat.js');
 
-/* GET /todos listing. */
+/* GET /cats listing. */
 router.get('/', function (req, res, next) {
-    Todo.find(function (err, todos) {
+    Cat.find(function (err, cats) {
         if (err) return next(err);
-        res.json(todos);
+        res.json(cats);
     });
 });
 
-/* POST /todos */
+/* POST /cats */
 router.post('/', function (req, res, next) {
-    Todo.create(req.body, function (err, post) {
+    Cat.create(req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-/* GET /todos/id */
+/* GET /cats/id */
 router.get('/:id', function (req, res, next) {
-    Todo.findById(req.params.id, function (err, post) {
+    Cat.findById(req.params.id, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-/* PUT /todos/:id */
+/* PUT /cats/:id */
 router.put('/:id', function (req, res, next) {
-    Todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    Cat.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
-/* DELETE /todos/:id */
+/* DELETE /cats/:id */
 router.delete('/:id', function (req, res, next) {
-    Todo.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+    Cat.findByIdAndRemove(req.params.id, req.body, function (err, post) {
         if (err) return next(err);
         res.json(post);
     });
 });
 
 module.exports = router;
+

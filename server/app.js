@@ -9,17 +9,23 @@ let sassMiddleware = require('node-sass-middleware');
 let index = require('./routes/index');
 let users = require('./routes/users');
 
-// var routes = require('./routes/index');
-var todos = require('./routes/todos');
+// let routes = require('./routes/index');
+let todos = require('./routes/todos');
+let cats = require('./routes/cats');
 
 // load mongoose package
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 // Use native Node promises
 mongoose.Promise = global.Promise;
 
+// // connect to MongoDB
+// mongoose.connect('mongodb://localhost/todo-api')
+//     .then(() =>  console.log('connection succesful'))
+//     .catch((err) => console.error(err));
+
 // connect to MongoDB
-mongoose.connect('mongodb://localhost/todo-api')
-    .then(() =>  console.log('connection succesful'))
+mongoose.connect('mongodb://localhost/mydb')
+    .then(() =>  console.log('connection to mongodb://localhost/ succesful'))
     .catch((err) => console.error(err));
 
 
@@ -46,6 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/todos', todos);
+app.use('/api/cats', cats);
 
 
 // catch 404 and forward to error handler
